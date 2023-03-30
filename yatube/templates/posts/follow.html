@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Вы подписаны на авторов{% endblock %}
+{% block header %} Посты авторов, на которых вы подписаны {% endblock %}
+{% load cache %}
+{% cache 20 index_page %}
+  {% block content %}
+  {% include "posts/includes/switcher.html" with follow=True %}
+  {% load thumbnail %}
+        <div class="container py-5">
+    {% for post in page_obj %}
+      {% include 'includes/post_card.html' %}
+      {% if not forloop.last %}<hr/>{% endif %}
+    {% endfor %}
+    {% include 'includes/paginator.html' %}
+  {% endblock %}
+</div>
+{% endcache %} 
